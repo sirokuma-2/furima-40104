@@ -5,8 +5,12 @@ class OrderShipping
    with_options presence: true do
     validates :item_id
     validates :user_id
-    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
+    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include a hyphen(-)" }
+    validates :prefecture_id, numericality: {
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: 47,
+      message:"must be between 1 and 47"
+    }
     validates :city
     validates :address
     validates :token
