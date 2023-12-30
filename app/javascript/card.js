@@ -13,6 +13,7 @@ const pay = () => {
   const submit = document.getElementById("charge-form");
 
   submit.addEventListener("click", (e) => {
+    e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
       } else {
@@ -26,7 +27,6 @@ const pay = () => {
       cvcElement.clear();
       document.getElementById("charge-form").submit();
     });
-    e.preventDefault();
   });
 };
 
