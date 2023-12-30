@@ -10,7 +10,7 @@ RSpec.describe OrderShipping, type: :model do
       it '全ての項目が存在すれば登録できる' do
         expect(@order_shipping).to be_valid
       end
-	    it 'building_nameが空でも登録できる' do
+      it 'building_nameが空でも登録できる' do
         @order_shipping.building_name = ''
         expect(@order_shipping).to be_valid
       end
@@ -32,9 +32,9 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("Postal code can't be blank")
       end
       it 'postal_codeは-を含まないと登録できない' do
-        @order_shipping.postal_code = "1234567"
+        @order_shipping.postal_code = '1234567'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Postal code is invalid. Include a hyphen(-)")
+        expect(@order_shipping.errors.full_messages).to include('Postal code is invalid. Include a hyphen(-)')
       end
       it 'prefecture_idが空では登録できない' do
         @order_shipping.prefecture_id = ''
@@ -44,12 +44,12 @@ RSpec.describe OrderShipping, type: :model do
       it 'prefecture_idが0では登録できない' do
         @order_shipping.prefecture_id = 0
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Prefecture must be between 1 and 47")
+        expect(@order_shipping.errors.full_messages).to include('Prefecture must be between 1 and 47')
       end
       it 'prefecture_idが48以上では登録できない' do
         @order_shipping.prefecture_id = 49
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Prefecture must be between 1 and 47")
+        expect(@order_shipping.errors.full_messages).to include('Prefecture must be between 1 and 47')
       end
       it 'cityが空では登録できない' do
         @order_shipping.city = ''
@@ -67,12 +67,12 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberは9桁以下では登録できない' do
-        @order_shipping.phone_number = Faker::Number.between(from: 0, to: 9999999).to_s
+        @order_shipping.phone_number = Faker::Number.between(from: 0, to: 9_999_999).to_s
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは12桁以上では登録できない' do
-        @order_shipping.phone_number = Faker::Number.between(from: 100000000000, to: 100000000000000).to_s
+        @order_shipping.phone_number = Faker::Number.between(from: 100_000_000_000, to: 100_000_000_000_000).to_s
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include('Phone number is invalid')
       end
