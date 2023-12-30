@@ -12,14 +12,14 @@ const pay = () => {
 
   const submit = document.getElementById("charge-form");
 
-  submit.addEventListener("click", (e) => {
+  submit.addEventListener("submit", (e) => {
     e.preventDefault();
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
       } else {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
-        const tokenObj = `<input value=${token} type="text" name='token'>`;
+        const tokenObj = `<input value=${token} type="hidden" name='token'>`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
       numberElement.clear();
