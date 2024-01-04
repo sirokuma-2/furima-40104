@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
     if current_user == @item.user
       redirect_to root_path
-    elsif @order_shipping.valid? && @order_shipping.save # order.saveから修正
+    elsif @order_shipping.valid? && @order_shipping.save
       pay_item
       redirect_to root_path
     else
