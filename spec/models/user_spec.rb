@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
       end
       it 'password:確認用と一致' do
-        @user.password_confirmation = @user.password + 'a'
+        @user.password_confirmation = "#{@user.password}a"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
       it 'email:一意性' do
-        first_user = FactoryBot.create(:user, email: 'test@test.co.jp')
+        FactoryBot.create(:user, email: 'test@test.co.jp')
         second_user = FactoryBot.build(:user, email: 'test@test.co.jp')
         second_user.valid?
         expect(second_user.errors.full_messages).to include('Email has already been taken')
