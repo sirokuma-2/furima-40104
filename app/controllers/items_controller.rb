@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    redirect_to root_path if Order.exists?(item_id: @item.id)
+    # redirect_to root_path if Order.exists?(item_id: @item.id)
   end
 
   def edit
